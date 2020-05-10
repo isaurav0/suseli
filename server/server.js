@@ -13,3 +13,5 @@ app.use(morgan('combined'));
 app.listen(3000, ()=>{
     console.log("server start on port 3000")
 })
+
+app.get("/songs", )
