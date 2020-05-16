@@ -9,7 +9,7 @@ app.use(morgan('combined'));
 app.use(express.static('build'));
 
 //run server 
-app.listen(3000, ()=>{
+app.listen(8080, ()=>{
     console.log("server start on port 3000")
 })
 
