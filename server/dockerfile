@@ -1,0 +1,7 @@
+FROM node:7
+WORKDIR /Users/mac/projects/suseli/suseliDock
+COPY package.json /Users/mac/projects/suseli/suseliDock/
+RUN npm install
+COPY . /Users/mac/projects/suseli/suseliDock/
+CMD node server.js
+EXPOSE 8081
