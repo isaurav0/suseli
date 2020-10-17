@@ -1,0 +1,9 @@
+{
+    "outline.problems.enabled": false,
+    "dart.showTodos": false,
+    "outline.problems.colors": false,
+    "problems.decorations.enabled": false,
+    "problems.autoReveal": false,
+    "editor.unusualLineTerminators": "off",
+    "outline.problems.badges": false
+}
