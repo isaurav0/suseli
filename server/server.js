@@ -7,7 +7,7 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(express.static('build'));
 app.use(express.static('data'))
 
@@ -53,6 +53,6 @@ app.get('/api/songs/:id/stream', (req, res)=>{
 })
 
 app.get('/api/songs/download', (req, res)=>{
-	const file = path.join(__dirname, 'data/audio/1.ogg')
+	const file = path.join(__dirname, 'data/audio/1.mp3')
 	res.sendFile(file)
 })
