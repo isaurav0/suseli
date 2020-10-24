@@ -7,7 +7,7 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-// app.use(morgan('combined'));
+app.use(morgan('combined'));
 app.use(express.static('build'));
 app.use(express.static('data'))
 
@@ -47,7 +47,6 @@ app.get('/api/songs/:id/stream', (req, res)=>{
 		'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
 		'Accept-Ranges': 'bytes', 'Content-Length': chunksize,
 		'Content-Type': 'audio/mpeg'
-		// 'Content-Type': 'text/html'
 	});
 	rstream.pipe(res);
 })
