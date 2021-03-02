@@ -1,13 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('combined'));
+app.use(fileUpload({
+    createParentPath: true
+}));
 app.use(express.static('build'));
 app.use(express.static('data'))
 
@@ -20,8 +24,6 @@ app.listen(PORT, ()=>{
 app.get("/",(req, res)=>{
 	return res.sendFile(__dirname + '/build/index.html')
 })
-
-app.route('/api/auth', require('./routes/api/auth/auth'))
 
 app.get('/api/songs/:id/stream', (req, res)=>{
 
@@ -55,3 +57,17 @@ app.get('/api/songs/download', (req, res)=>{
 	const file = path.join(__dirname, 'data/audio/1.mp3')
 	res.sendFile(file)
 })
+
+// API for prediction
+app.post('/predict', (req, res)=>{
+	if(!req.files)
+		return res.status(400).send({'success': false, 'genre': 'Audio File Missing'})
+	genre = get_genre(req.files.data)
+	return res.status(200).send({'success': true, 'genre': genre})
+})
+
+function get_genre(song){
+	let genres = ['adhunik', 'lokdohori', 'pop', 'filmy', 'rap']
+	random_genre = genres[Math.floor(Math.random() * genres.length)]
+	return random_genre
+}
