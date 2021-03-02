@@ -59,6 +59,10 @@ app.get('/api/songs/download', (req, res)=>{
 })
 
 // API for prediction
+app.get('/predict', (req, res)=>{
+	return res.status(200).send({'message': 'Send POST request with audio file for prediction'})
+})
+
 app.post('/predict', (req, res)=>{
 	if(!req.files)
 		return res.status(400).send({'success': false, 'genre': 'Audio File Missing'})
