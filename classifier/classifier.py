@@ -1,7 +1,7 @@
 # CONFIGURATION VARIABLES of Project
 LABELS = ['hiphop' 'dohori' 'adhunik' 'filmy' 'pop']
-PATH_TO_MODEL = 'Model/final/finalModel'
-PATH_TO_WEIGHTS = 'Model/final/final_weights'
+PATH_TO_MODEL = 'featureVector/final/finalModel'
+PATH_TO_WEIGHTS = 'featureVector/final/final_weights/final_weights'
 
 
 # important on backend
@@ -33,7 +33,7 @@ def prepare_input(file_path):
     hop_length = 512
     SAMPLE_RATE = 22050
     segment_size = 66150
-    signal, sr = librosa.load(file_path, sr=SAMPLE_RATE, duration=30)
+    signal, sr = librosa.load(file_path, sr=SAMPLE_RATE)
     start = segment_size * 1
     end = start + segment_size
     mfcc = librosa.feature.mfcc(signal[:segment_size], SAMPLE_RATE, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length)
@@ -68,10 +68,11 @@ def find_genre_from_audio(audio_file):
         # Load Model
         print("Loading Model .. ")
         model = keras.models.load_model(PATH_TO_MODEL)
+        model.summary()
 
         # Load Weights to Model
         print("Loading Weights .. ")
-        model.load_weights(PATH_TO_WEIGHTS)
+        # model.load_weights(PATH_TO_WEIGHTS)        
         
         # Make Prediction
         print("Making Prediction .. ")
