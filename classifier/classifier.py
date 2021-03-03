@@ -1,7 +1,7 @@
 # CONFIGURATION VARIABLES of Project
 LABELS = ['hiphop' 'dohori' 'adhunik' 'filmy' 'pop']
 PATH_TO_MODEL = 'Model/final/finalModel'
-PATH_TO_WEIGHTS = 'Model/final/weights'
+PATH_TO_WEIGHTS = 'Model/final/final_weights'
 
 
 # important on backend
