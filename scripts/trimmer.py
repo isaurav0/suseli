@@ -12,17 +12,7 @@ import subprocess
 def trim_audio(input_file, output_file):
     print("Input File: ", input_file)
     print("Output File: ", output_file)
-    # command
-    # ffmpeg -ss 10 -i input_file -t 40 output_file
-
     subprocess.call(['ffmpeg', '-ss', '10', '-i', input_file, '-t', '40', output_file])
-
-    # input_file = '\ '.join(input_file.split(' '))
-    # with open(input_file, 'rb') as ip:
-    #     for data in ip.readlines():
-    #         with open(output_file, 'wb') as fw:
-    #             fw.write(data)
-
 
 
 def ismp4(file):

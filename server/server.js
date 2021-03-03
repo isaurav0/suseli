@@ -4,14 +4,17 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs');
+const { json } = require('express');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(morgan('combined'));
-app.use(fileUpload({
-    createParentPath: true
-}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(morgan('combined'));
+// app.use(fileUpload({
+//     // createParentPath: true
+// }));
+
+app.use(fileUpload());
 app.use(express.static('build'));
 app.use(express.static('data'))
 
@@ -64,8 +67,14 @@ app.get('/predict', (req, res)=>{
 })
 
 app.post('/predict', (req, res)=>{
+
 	if(!req.files)
 		return res.status(400).send({'success': false, 'genre': 'Audio File Missing'})
+	console.log("File: ", req.files['data'])
+	// string_ = req.files['data']['data'].toString()
+	// json_data = JSON.parse(string_)
+	// console.log(json_data)
+	// console.log(json_data['name'])
 	genre = get_genre(req.files.data)
 	return res.status(200).send({'success': true, 'genre': genre})
 })
