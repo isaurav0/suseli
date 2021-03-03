@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs');
 const { json } = require('express');
+const { spawn } = require('child_process');
 
 const app = express();
 // app.use(bodyParser.json());
@@ -16,7 +17,7 @@ const app = express();
 
 app.use(fileUpload());
 app.use(express.static('build'));
-app.use(express.static('data'))
+app.use(express.static('data'));
 
 const PORT = 8081 
 //run server 

@@ -15,8 +15,8 @@ def trim_audio(input_file, output_file):
     subprocess.call(['ffmpeg', '-ss', '10', '-i', input_file, '-t', '40', output_file])
 
 
-def ismp4(file):
-    formats = ['mp4']
+def isValidFile(file):
+    formats = ['mp4', 'mp3']
     if file.split('.')[-1] in formats:
         return True
     return False
@@ -47,7 +47,7 @@ def main():
             exit()
 
         output_file = output_file if output_file else 'cut_' + input_file
-        trim_audio(input_file, output_file, format="mp3")
+        trim_audio(input_file, output_file)
         exit()
 
     if input_directory:
@@ -68,7 +68,7 @@ def main():
         print("Files: ", files)
         print("---------------------")
         for i, file in enumerate(files):
-            if not ismp4(file):
+            if not isValidFile(file):
                 continue
             input_file = os.path.join(folder, file)
             sub_directory = folder.split('/')[-1]
@@ -76,12 +76,10 @@ def main():
             if not os.path.exists(output_sub_directory):
                 print("Creating sub directory: ", output_sub_directory)
                 os.makedirs(output_sub_directory)
-            out_format = 'mp3'
+            out_format = 'wav'
             output_file = os.path.join(output_sub_directory, str(i) + '.' + out_format)
             trim_audio(input_file, output_file)
             print('+++++++Converted+++++++++++')
-
-
 
 
 if __name__ == "__main__":
